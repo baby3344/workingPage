@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org//dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.WorKingMapper">
+    <!--查询所有记录-->
+    <select id="getList" resultType="Working">
+        select w.id,w.content,w.title,w.createDate,w.type from working w ORDER BY w.createDate
+    </select>
+
+   <!--根据标签查询记录数-->
+    <select id="getCount" resultType="Integer">
+        select count(*) from working where title=#{title}
+    </select>
+
+    <!--获取总记录数-->
+    <select id="getTotalCount" resultType="Integer">
+        select count(*) from working
+    </select>
+
+    <select id="getWorking" resultType="Working">
+        select w.id,w.content,w.title,w.createDate,w.type from working w where id=#{id}
+    </select>
+
+    <!--新增记录-->
+    <insert id="save">
+        INSERT into working(title,content,type) VALUES(#{title},#{content},#{type})
+    </insert>
+
+    <!--分页查询数据-->
+    <select id="getListPage" resultType="Working" parameterType="int">
+        select w.id,w.content,w.title,w.createDate,w.type from working w ORDER BY w.createDate limit #{beginIndex},#{pageSize}
+    </select>
+</mapper>
